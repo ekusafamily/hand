@@ -1,6 +1,7 @@
 
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import MobileCartBar from './components/MobileCartBar'
 import Home from './pages/Home'
 import Shop from './pages/Shop'
 import ProductDetails from './pages/ProductDetails'
@@ -13,6 +14,7 @@ function App() {
   return (
     <div className="app">
       <Navbar />
+      <MobileCartBar />
       <main className="container" style={{ padding: '40px 20px', minHeight: '80vh' }}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -25,7 +27,7 @@ function App() {
         </Routes>
       </main>
       <footer style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
-        <p>&copy; 2026 IRERI DESIGNS. All rights reserved.</p>
+        <p>&copy; 2026 Handbag Shop. All rights reserved.</p>
       </footer>
     </div>
   )
