@@ -27,7 +27,7 @@ export default function Home() {
                         Timeless Elegance for Your Lifestyle
                     </span>
                     <h1 style={{ fontSize: '3.5rem', marginBottom: '24px', color: '#1a1a1a', fontWeight: '800', lineHeight: '1.1' }}>
-                        Sussie's <br /> Collection
+                        Welcome to<br /> Sussie's Collection
                     </h1>
                     <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '40px', lineHeight: '1.6' }}>
                         Curated handbags and household essentials delivered right to your doorstep.
@@ -38,13 +38,13 @@ export default function Home() {
                             Shop Now
                         </Link>
                         <Link to="/auth" className="btn btn-outline" style={{ padding: '16px 32px', fontSize: '1.1rem' }}>
-                            Create account
+                            Account
                         </Link>
                     </div>
                 </div>
             </section>
 
-            {/* Our Promise Section: We Pay, We Deliver */}
+            {/* Our Promise Section: You Pay, We Deliver */}
             <section style={{ padding: '80px 0', backgroundColor: 'white' }}>
                 <div className="container">
                     <div style={{
@@ -71,7 +71,7 @@ export default function Home() {
                                 transition: 'transform 0.3s ease'
                             }}>
                                 <div style={{ fontSize: '3rem', marginBottom: '20px' }}>💳</div>
-                                <h3 style={{ fontSize: '1.5rem', marginBottom: '16px' }}>We Pay</h3>
+                                <h3 style={{ fontSize: '1.5rem', marginBottom: '16px' }}>You Pay</h3>
                                 <p style={{ color: '#666', lineHeight: '1.6' }}>
                                     We handle all the upstream logistics and manufacturing costs.
                                     Our commitment starts with investing in quality products before they even reach you.
@@ -217,5 +217,6 @@ export default function Home() {
         </div>
     )
 }
+
 
 
