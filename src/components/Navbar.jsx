@@ -2,6 +2,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { useCart } from '../lib/CartContext'
+import { Home, ClipboardList, User, ShoppingBag, LogOut } from 'lucide-react'
 
 const ADMIN_EMAILS = ['kabilalavijanadeveloper@gmail.com', 'admin@handbagshop.com']
 
@@ -11,86 +12,115 @@ export default function Navbar() {
     const location = useLocation()
     const { totalItems } = useCart()
 
-    // ... existing useEffect ...
+    useEffect(() => {
+        // Check active session
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setUser(session?.user ?? null)
+        })
 
-    // ... existing handleLogout ...
+        // Listen for changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null)
+        })
 
-    // ... existing display name logic ...
+        return () => subscription.unsubscribe()
+    }, [])
+
+    const handleLogout = async () => {
+        const { error } = await supabase.auth.signOut()
+        if (!error) navigate('/')
+    }
+
+    // Get display name
+    const displayName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User'
+    const isAdmin = user && ADMIN_EMAILS.includes(user.email)
 
     return (
-        <nav style={{ /* ... existing styles ... */ }}>
-            {/* ... inside container ... */}
+        <nav style={{
+            height: 'var(--header-height)',
+            borderBottom: '1px solid #333',
+            display: 'flex',
+            alignItems: 'center',
+            backgroundColor: '#1a1a1a', // Dark Background
+            color: '#fff',
+            position: 'sticky',
+            top: 0,
+            zIndex: 1000,
+            boxShadow: '0 2px 10px rgba(0,0,0,0.3)'
+        }}>
             <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', height: '100%' }}>
                 <Link to="/" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s' }} className="nav-logo">
                     <img src="/logo.png" alt="Sussie Collections" style={{ height: '75px', width: '75px', objectFit: 'cover', borderRadius: '50%', border: '2px solid var(--color-accent)' }} />
                 </Link>
 
-                <div style={{ display: 'flex', gap: '32px', alignItems: 'center', fontWeight: '500' }}>
-                    <Link to="/" style={{ color: '#fff', transition: 'color 0.2s' }}>Home</Link>
+                {/* Central Navigation with Universal Icons */}
+                <div style={{ display: 'flex', gap: '20px', alignItems: 'center', fontWeight: '500' }}>
 
-                    {/* Hide Shop link on mobile ONLY if we are in the shop section OR just generally hide it to save space as requested? 
-                       User said: "once in the shop section the shop tag to dissappear" -> conditional. */}
+                    <Link to="/" style={{ color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', fontSize: '0.75rem', textDecoration: 'none' }}>
+                        <Home size={22} color={location.pathname === '/' ? 'var(--color-accent)' : '#fff'} />
+                        <span>Home</span>
+                    </Link>
+
+                    <Link to="/my-orders" style={{ color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', fontSize: '0.75rem', textDecoration: 'none' }}>
+                        <ClipboardList size={22} color={location.pathname === '/my-orders' ? 'var(--color-accent)' : '#fff'} />
+                        <span>Orders</span>
+                    </Link>
+
+                    {/* Check if user is logged in to decide destination/label */}
+                    <Link to={user ? "/auth" : "/auth"} style={{ color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', fontSize: '0.75rem', textDecoration: 'none' }}>
+                        <User size={22} color={location.pathname === '/auth' ? 'var(--color-accent)' : '#fff'} />
+                        <span style={{ whiteSpace: 'nowrap' }}>{user ? 'Profile' : 'Account'}</span>
+                    </Link>
+
+                    {/* Shop Link - Hidden when ON the shop page */}
                     <Link
                         to="/shop"
                         className={location.pathname === '/shop' ? 'mobile-hidden' : ''}
-                        style={{ color: '#fff', transition: 'color 0.2s' }}
+                        style={{ color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', fontSize: '0.75rem', textDecoration: 'none' }}
                     >
-                        Shop
+                        <ShoppingBag size={22} color={location.pathname === '/shop' ? 'var(--color-accent)' : '#fff'} />
+                        <span>Shop</span>
                     </Link>
 
-                    {/* Cart Removed from Navbar - Handled by Floating Button */}
                 </div>
 
-                {/* ... rest of navbar ... */}
 
-
-                <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+                {/* Right Side: Welcome / Logout / Admin */}
+                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                     {user ? (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                            <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column' }}>
-                                <span style={{ fontSize: '0.8rem', color: '#bbb', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Welcome</span>
-                                <span style={{ fontSize: '0.95rem', fontWeight: '500', textTransform: 'capitalize', color: 'var(--color-accent)' }}>{displayName}</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            {/* Hide welcome text on mobile to save space */}
+                            <div className="mobile-hidden" style={{ textAlign: 'right', display: 'flex', flexDirection: 'column' }}>
+                                <span style={{ fontSize: '0.7rem', color: '#bbb', fontWeight: '600', textTransform: 'uppercase' }}>Welcome</span>
+                                <span style={{ fontSize: '0.85rem', fontWeight: '500', color: 'var(--color-accent)' }}>{displayName}</span>
                             </div>
-                            <div style={{ height: '32px', width: '1px', backgroundColor: '#444' }}></div>
-                            <Link to="/my-orders" className="btn" style={{
-                                padding: '8px 16px',
-                                fontSize: '0.85rem',
-                                background: '#333',
-                                borderRadius: '12px',
-                                color: '#fff',
-                                border: '1px solid #555',
-                                fontWeight: '600'
-                            }}>
-                                Orders
-                            </Link>
 
-                            {/* Only Show Dashboard to Admins */}
                             {isAdmin && (
                                 <Link to="/admin" className="btn" style={{
-                                    padding: '8px 16px',
-                                    fontSize: '0.85rem',
+                                    padding: '6px 12px',
+                                    fontSize: '0.75rem',
                                     background: 'var(--color-accent)',
-                                    borderRadius: '12px',
+                                    borderRadius: '8px',
                                     color: '#000',
-                                    fontWeight: 'bold'
+                                    fontWeight: 'bold',
+                                    textDecoration: 'none'
                                 }}>
                                     Dashboard
                                 </Link>
                             )}
+
                             <button onClick={handleLogout} style={{
-                                fontSize: '0.85rem',
                                 color: '#ff6b6b',
-                                fontWeight: '500',
                                 padding: '8px',
-                                borderRadius: '8px',
-                                border: '1px solid transparent',
-                                transition: 'all 0.2s'
-                            }} className="btn-logout">
-                                Sign Out
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }} title="Sign Out">
+                                <LogOut size={20} />
                             </button>
                         </div>
                     ) : (
-                        <Link to="/auth" className="btn btn-primary" style={{ padding: '10px 24px', borderRadius: '12px', background: 'var(--color-accent)', color: '#000' }}>
+                        <Link to="/auth" className="btn btn-primary mobile-hidden" style={{ padding: '8px 16px', borderRadius: '8px', background: 'var(--color-accent)', color: '#000', fontSize: '0.9rem', textDecoration: 'none' }}>
                             Sign In
                         </Link>
                     )}
