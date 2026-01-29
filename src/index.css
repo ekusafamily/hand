@@ -149,23 +149,16 @@ label {
   color: var(--color-text-light);
 }
 
-/* Mobile Cart Bar */
+/* Mobile Cart Bar (FAB) */
 @media (min-width: 641px) {
   .mobile-cart-bar {
-    display: none !important;
-  }
-
-  .mobile-only-spacer {
     display: none !important;
   }
 }
 
 @media (max-width: 640px) {
   .mobile-cart-bar {
-    display: flex;
-  }
-
-  .mobile-only-spacer {
     display: block;
+    /* FAB manages its own fixed positioning */
   }
 }
