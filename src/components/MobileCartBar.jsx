@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../lib/CartContext';
+import { ShoppingBag } from 'lucide-react';
 
 export default function MobileCartBar() {
     const { cart } = useCart();
@@ -10,8 +11,8 @@ export default function MobileCartBar() {
         <div className="mobile-cart-bar">
             <Link to="/cart" style={{
                 position: 'fixed',
-                bottom: '24px',
-                right: '24px',
+                bottom: '32px',
+                right: '32px',
                 backgroundColor: '#1a1a1a',
                 color: 'white',
                 width: '72px',
@@ -20,13 +21,18 @@ export default function MobileCartBar() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+                boxShadow: '0 6px 16px rgba(0,0,0,0.3)',
                 zIndex: 9999,
                 textDecoration: 'none',
-                transition: 'transform 0.2s'
-            }}>
-                <div style={{ position: 'relative' }}>
-                    <span style={{ fontSize: '2rem' }}>🛒</span>
+                transition: 'transform 0.2s, background-color 0.2s',
+                border: '2px solid #333'
+            }}
+                onMouseOver={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.backgroundColor = 'black'; }}
+                onMouseOut={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.backgroundColor = '#1a1a1a'; }}
+            >
+                <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <ShoppingBag size={32} strokeWidth={2} />
+
                     {totalItems > 0 && (
                         <span style={{
                             position: 'absolute',
@@ -34,15 +40,16 @@ export default function MobileCartBar() {
                             right: '-8px',
                             backgroundColor: '#ff4444',
                             color: 'white',
-                            fontSize: '0.75rem',
+                            fontSize: '0.85rem',
                             fontWeight: 'bold',
-                            minWidth: '20px',
-                            height: '20px',
+                            minWidth: '24px',
+                            height: '24px',
                             borderRadius: '50%',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            border: '2px solid #1a1a1a'
+                            border: '2px solid #1a1a1a',
+                            boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
                         }}>
                             {totalItems}
                         </span>
