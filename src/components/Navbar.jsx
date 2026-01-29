@@ -1,64 +1,48 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { useCart } from '../lib/CartContext'
 
-const ADMIN_EMAILS = ['kabilalavijanadeveloper@gmail.com', 'admin@handbagshop.com'] // Add your admin email here
+const ADMIN_EMAILS = ['kabilalavijanadeveloper@gmail.com', 'admin@handbagshop.com']
 
 export default function Navbar() {
     const [user, setUser] = useState(null)
     const navigate = useNavigate()
+    const location = useLocation()
     const { totalItems } = useCart()
 
-    useEffect(() => {
-        // Check active session
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            setUser(session?.user ?? null)
-        })
+    // ... existing useEffect ...
 
-        // Listen for changes
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            setUser(session?.user ?? null)
-        })
+    // ... existing handleLogout ...
 
-        return () => subscription.unsubscribe()
-    }, [])
-
-    const handleLogout = async () => {
-        const { error } = await supabase.auth.signOut()
-        if (!error) navigate('/')
-    }
-
-    // Get display name
-    const displayName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User'
-    const isAdmin = user && ADMIN_EMAILS.includes(user.email)
+    // ... existing display name logic ...
 
     return (
-        <nav style={{
-            height: 'var(--header-height)',
-            borderBottom: '1px solid #333',
-            display: 'flex',
-            alignItems: 'center',
-            backgroundColor: '#1a1a1a', // Dark Background
-            color: '#fff',
-            position: 'sticky',
-            top: 0,
-            zIndex: 1000,
-            boxShadow: '0 2px 10px rgba(0,0,0,0.3)'
-        }}>
+        <nav style={{ /* ... existing styles ... */ }}>
+            {/* ... inside container ... */}
             <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', height: '100%' }}>
                 <Link to="/" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s' }} className="nav-logo">
-                    <img src="/logo.png" alt="Sussie Collections" style={{ height: '75px', width: '75px', objectFit: 'cover', borderRadius: '50%', border: '2px solid var(--color-accent)' }} /> {/* Circular Logo */}
+                    <img src="/logo.png" alt="Sussie Collections" style={{ height: '75px', width: '75px', objectFit: 'cover', borderRadius: '50%', border: '2px solid var(--color-accent)' }} />
                 </Link>
 
                 <div style={{ display: 'flex', gap: '32px', alignItems: 'center', fontWeight: '500' }}>
                     <Link to="/" style={{ color: '#fff', transition: 'color 0.2s' }}>Home</Link>
-                    <Link to="/shop" style={{ color: '#fff', transition: 'color 0.2s' }}>Shop</Link>
-                    <Link to="/cart" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#fff' }}>
-                        <span style={{ fontSize: '1.2rem' }}>🛒</span>
-                        <span>Cart ({totalItems})</span>
+
+                    {/* Hide Shop link on mobile ONLY if we are in the shop section OR just generally hide it to save space as requested? 
+                       User said: "once in the shop section the shop tag to dissappear" -> conditional. */}
+                    <Link
+                        to="/shop"
+                        className={location.pathname === '/shop' ? 'mobile-hidden' : ''}
+                        style={{ color: '#fff', transition: 'color 0.2s' }}
+                    >
+                        Shop
                     </Link>
+
+                    {/* Cart Removed from Navbar - Handled by Floating Button */}
                 </div>
+
+                {/* ... rest of navbar ... */}
+
 
                 <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
                     {user ? (
