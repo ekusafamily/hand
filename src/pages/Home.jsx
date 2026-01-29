@@ -44,6 +44,95 @@ export default function Home() {
                 </div>
             </section>
 
+
+
+
+            {/* Categories Section */}
+            <section style={{ padding: '100px 0' }}>
+                <div className="container">
+                    <h2 style={{ textAlign: 'center', marginBottom: '60px', fontSize: '2.5rem' }}>Browse Collections</h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '30px' }}>
+                        {/* Handbags */}
+                        <div style={{
+                            height: '450px',
+                            background: '#eee',
+                            borderRadius: '24px',
+                            display: 'flex',
+                            alignItems: 'flex-end',
+                            justifyContent: 'center',
+                            position: 'relative',
+                            overflow: 'hidden'
+                        }}>
+                            <img
+                                src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=800"
+                                alt="Handbags"
+                                style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                            <div style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                background: 'linear-gradient(to top, rgba(0,0,0,0.4), transparent)'
+                            }}></div>
+                            <Link to="/shop" style={{
+                                position: 'relative',
+                                background: 'white',
+                                padding: '16px 40px',
+                                borderRadius: '12px',
+                                fontWeight: 'bold',
+                                zIndex: 1,
+                                marginBottom: '40px',
+                                boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
+                            }}>
+                                Shop Handbags
+                            </Link>
+                        </div>
+
+                        {/* Household */}
+                        <div style={{
+                            height: '450px',
+                            background: '#eee',
+                            borderRadius: '24px',
+                            display: 'flex',
+                            alignItems: 'flex-end',
+                            justifyContent: 'center',
+                            position: 'relative',
+                            overflow: 'hidden'
+                        }}>
+                            <img
+                                src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&q=80&w=800"
+                                alt="Household"
+                                style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                            <div style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                background: 'linear-gradient(to top, rgba(0,0,0,0.4), transparent)'
+                            }}></div>
+                            <Link to="/shop" style={{
+                                position: 'relative',
+                                background: 'white',
+                                padding: '16px 40px',
+                                borderRadius: '12px',
+                                fontWeight: 'bold',
+                                zIndex: 1,
+                                marginBottom: '40px',
+                                boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
+                            }}>
+                                Home Essentials
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            
             {/* Our Promise Section: You Pay, We Deliver */}
             <section style={{ padding: '80px 0', backgroundColor: 'white' }}>
                 <div className="container">
@@ -131,92 +220,10 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Categories Section */}
-            <section style={{ padding: '100px 0' }}>
-                <div className="container">
-                    <h2 style={{ textAlign: 'center', marginBottom: '60px', fontSize: '2.5rem' }}>Browse Collections</h2>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '30px' }}>
-                        {/* Handbags */}
-                        <div style={{
-                            height: '450px',
-                            background: '#eee',
-                            borderRadius: '24px',
-                            display: 'flex',
-                            alignItems: 'flex-end',
-                            justifyContent: 'center',
-                            position: 'relative',
-                            overflow: 'hidden'
-                        }}>
-                            <img
-                                src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=800"
-                                alt="Handbags"
-                                style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'cover' }}
-                            />
-                            <div style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                right: 0,
-                                bottom: 0,
-                                background: 'linear-gradient(to top, rgba(0,0,0,0.4), transparent)'
-                            }}></div>
-                            <Link to="/shop" style={{
-                                position: 'relative',
-                                background: 'white',
-                                padding: '16px 40px',
-                                borderRadius: '12px',
-                                fontWeight: 'bold',
-                                zIndex: 1,
-                                marginBottom: '40px',
-                                boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
-                            }}>
-                                Shop Handbags
-                            </Link>
-                        </div>
-
-                        {/* Household */}
-                        <div style={{
-                            height: '450px',
-                            background: '#eee',
-                            borderRadius: '24px',
-                            display: 'flex',
-                            alignItems: 'flex-end',
-                            justifyContent: 'center',
-                            position: 'relative',
-                            overflow: 'hidden'
-                        }}>
-                            <img
-                                src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&q=80&w=800"
-                                alt="Household"
-                                style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'cover' }}
-                            />
-                            <div style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                right: 0,
-                                bottom: 0,
-                                background: 'linear-gradient(to top, rgba(0,0,0,0.4), transparent)'
-                            }}></div>
-                            <Link to="/shop" style={{
-                                position: 'relative',
-                                background: 'white',
-                                padding: '16px 40px',
-                                borderRadius: '12px',
-                                fontWeight: 'bold',
-                                zIndex: 1,
-                                marginBottom: '40px',
-                                boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
-                            }}>
-                                Home Essentials
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
     )
 }
+
 
 
 
