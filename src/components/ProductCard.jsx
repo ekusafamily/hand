@@ -1,12 +1,19 @@
-
-import { Link } from 'react-router-dom'
-import { useCart } from '../lib/CartContext'
+import { useToast } from '../lib/ToastContext'
 
 export default function ProductCard({ product }) {
     const { addToCart } = useCart();
+    const { addToast } = useToast();
+
+    const handleAddToCart = () => {
+        if (product.stock > 0) {
+            addToCart(product);
+            addToast(`Added ${product.title} to cart`);
+        }
+    };
 
     return (
         <div className="product-card" style={{ border: '1px solid #eee', borderRadius: '8px', overflow: 'hidden', transition: 'transform 0.2s', backgroundColor: '#fff' }}>
+            {/* ... existing image logic ... */}
             <Link to={`/product/${product.id}`} style={{ display: 'block', height: '300px', overflow: 'hidden' }}>
                 <img
                     src={product.image_url || 'https://via.placeholder.com/300'}
@@ -15,6 +22,7 @@ export default function ProductCard({ product }) {
                 />
             </Link>
             <div style={{ padding: '16px' }}>
+                {/* ... existing title logic ... */}
                 <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                         {product.title}
@@ -32,7 +40,7 @@ export default function ProductCard({ product }) {
                     </span>
                 </div>
                 <button
-                    onClick={() => product.stock > 0 && addToCart(product)}
+                    onClick={handleAddToCart}
                     className={`btn ${product.stock > 0 ? 'btn-outline' : 'btn-disabled'}`}
                     disabled={product.stock <= 0}
                     style={{
