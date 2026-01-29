@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { useCart } from '../lib/CartContext'
 import { useToast } from '../lib/ToastContext'
 
 export default function ProductCard({ product }) {
