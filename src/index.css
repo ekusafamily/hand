@@ -148,3 +148,24 @@ label {
   font-weight: 500;
   color: var(--color-text-light);
 }
+
+/* Mobile Cart Bar */
+@media (min-width: 641px) {
+  .mobile-cart-bar {
+    display: none !important;
+  }
+
+  .mobile-only-spacer {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .mobile-cart-bar {
+    display: flex;
+  }
+
+  .mobile-only-spacer {
+    display: block;
+  }
+}
