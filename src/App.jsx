@@ -25,7 +25,7 @@ function App() {
         </Routes>
       </main>
       <footer style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
-        <p>&copy; 2026 Handbag Shop. All rights reserved.</p>
+        <p>&copy; 2026 IRERI DESIGNS. All rights reserved.</p>
       </footer>
     </div>
   )
