@@ -24,10 +24,10 @@ export default function Home() {
                         color: '#a88b6e',
                         marginBottom: '24px'
                     }}>
-                        Welcome to Sussie Collections
+                        Timeless Elegance for Your Lifestyle
                     </span>
                     <h1 style={{ fontSize: '3.5rem', marginBottom: '24px', color: '#1a1a1a', fontWeight: '800', lineHeight: '1.1' }}>
-                        Timeless Elegance <br /> for Your Lifestyle
+                        Sussie's <br /> Collection
                     </h1>
                     <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '40px', lineHeight: '1.6' }}>
                         Curated handbags and household essentials delivered right to your doorstep.
@@ -217,4 +217,5 @@ export default function Home() {
         </div>
     )
 }
+
 
