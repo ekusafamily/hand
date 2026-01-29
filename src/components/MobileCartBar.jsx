@@ -14,8 +14,8 @@ export default function MobileCartBar() {
                 right: '24px',
                 backgroundColor: '#1a1a1a',
                 color: 'white',
-                width: '60px',
-                height: '60px',
+                width: '72px',
+                height: '72px',
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
@@ -26,7 +26,7 @@ export default function MobileCartBar() {
                 transition: 'transform 0.2s'
             }}>
                 <div style={{ position: 'relative' }}>
-                    <span style={{ fontSize: '1.5rem' }}>🛒</span>
+                    <span style={{ fontSize: '2rem' }}>🛒</span>
                     {totalItems > 0 && (
                         <span style={{
                             position: 'absolute',
