@@ -38,7 +38,7 @@ export default function Home() {
                             Shop Now
                         </Link>
                         <Link to="/auth" className="btn btn-outline" style={{ padding: '16px 32px', fontSize: '1.1rem' }}>
-                            Join Member Club
+                            Create account
                         </Link>
                     </div>
                 </div>
@@ -96,7 +96,7 @@ export default function Home() {
 
                         <div style={{ marginTop: '60px', padding: '24px 40px', backgroundColor: '#f3f0eb', borderRadius: '16px' }}>
                             <p style={{ fontSize: '1.2rem', fontWeight: '500', color: '#333' }}>
-                                <strong>"We Pay, We Deliver"</strong> — It's more than a slogan, it's our guarantee of trust and efficiency.
+                                <strong>"You Pay, We Deliver"</strong> — It's more than a slogan, it's our guarantee of trust and efficiency.
                             </p>
                         </div>
                     </div>
@@ -217,3 +217,4 @@ export default function Home() {
         </div>
     )
 }
+
